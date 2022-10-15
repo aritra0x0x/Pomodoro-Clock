@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding:0;
+   box-sizing:border-box;
+  }
+  h1{
+    color:rgb(150, 151, 150);
+    font-family:Lucida Sans;
+    margin-bottom:2%;
+  }
+  #container{
+    height:500px;
+    width:500px;
+    margin-left:35%;
+  }
+  #send{
+    background-color:rgb(72, 173, 72);
+    color:#fff;
+    border:none;
+    padding:2%;
+    border-radius:4px;
+    margin-top:2%;
+  }
+  #title{
+    color:rgb(150, 151, 150);
+    font-size:24px;
+  }

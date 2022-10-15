@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <style>
+      *{
+        margin:0;
+        padding:0;
+       box-sizing:border-box;
+      }
+      h1{
+        color:rgb(150, 151, 150);
+        font-family:Lucida Sans;
+        margin-bottom:2%;
+      }
+      #container{
+        height:500px;
+        width:500px;
+        margin-left:35%;
+      }
+      #send{
+        background-color:rgb(72, 173, 72);
+        color:#fff;
+        border:none;
+        padding:2%;
+        border-radius:4px;
+        margin-top:2%;
+      }
+      #title{
+        color:rgb(150, 151, 150);
+        font-size:24px;
+      }
+      </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>API Sample</h1>
+      <input type="text" id="username" placeholder="Github username"/><br>
+      <input type="button" id="send" value="Pull User data"/>
+      <div id="title">
+      </div>
+      <img id="img"/>
+      <span id="followers"></span>
+      <span id="following"></span>
+      <span id="repos"></span>
+      <div id="reposlist">
+
+        </div>
+    </div>
+  </body>
+
+  <script>
+let username=document.getElementById("username");
+let button=document.getElementById("send");
+let title=document.getElementById("title");
+let img=document.getElementById("img");
+let followers=document.getElementById("followers");
+let following=document.getElementById("following");
+let repos=document.getElementById("repos");
+let reposlist=document.getElementById("reposlist");
+
+button.addEventListener("click",function()
+{
+
+let request=new XMLHttpRequest();
+request.open("GET",`https://api.github.com/users/${username.value}`,true);
+request.addEventListener("load",function(){
+  let obj=JSON.parse(request.responseText);
+  img.setAttribute("src",obj.avatar_url);
+  title.innerHTML=`${obj.name} (@${obj.login})`;
+  followers.innerHTML="Followers :"+obj.followers;
+})
+request.send();
+
+let reporequest=new XMLHttpRequest();
+reporequest.open("GET",`https://api.github.com/users/${username.value}/repos`,true);
+reporequest.addEventListener("load",function(){
+  let obj=JSON.parse(reporequest.responseText);
+ obj.forEach(function(repo){
+   let span=document.createElement("Span");
+   span.innerHTML=repo.name;
+   reposlist.appendChild(span);
+   
+ })
+})
+reporequest.send();
+
+
+
+
+
+})
+
+  </script>
+</html>
